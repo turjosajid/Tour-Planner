@@ -1,0 +1,116 @@
+<!-- confirm_booking.html -->
+{% extends "index.html" %}
+
+{% block title %}
+    Confirm Booking
+{% endblock %}
+
+{% block style %}
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 500px !important;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            font-size:larger ;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .container a{
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #7E42F1;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .container a:hover{
+            background-color: #4d06d0;
+        }
+
+        .dropdown {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .dropdown select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #7E42F1;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-submit:hover {
+            background-color: #4d06d0;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block logout%}
+<a class="bg-txt text-white w-28 h-12 rounded-full flex justify-center items-center font-semibold hover:shadow-lg hover:text-primary" href="{{url_for('logout')}}">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="/confirm_booking" method="POST">
+        <div class="form-group">
+            <div class="dropdown">
+            <label for="dinner_reservation">Dinner Reservation:</label>
+            <select class="form-control" id="dinner_reservation" name="dinner_reservation">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+        </div>
+        <input type="hidden" name="destination" value="{{ destination }}">
+        <input type="hidden" name="hotel" value="{{ hotel }}">
+        <input type="hidden" name="transport" value="{{ transport }}">
+        <input type="hidden" name="room" value="{{ room }}">
+        <input type="hidden" name="arrival_date" value="{{ arrival_date }}">
+        <input type="hidden" name="departure_date" value="{{ departure_date }}">
+
+        <button type="submit" class="btn-submit">Confirm Booking</button>
+    </form>
+</div>
+{% endblock %}

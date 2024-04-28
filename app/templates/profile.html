@@ -1,0 +1,137 @@
+{% extends "index.html" %}
+
+{% block title %}
+  Dashboard
+{% endblock %}
+
+{% block style %}
+  <style>
+    .container {
+      width: 50%;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    .container h1{
+      text-align: center;
+      color: #333;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .profile-details {
+      /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-details h2{
+      color: #333;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .detail {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    span {
+      margin-left: 10px;
+      color: #333;
+    }
+
+    .button {
+      display: block-inline;
+      margin-top: 15px;
+      padding: 10px 20px;
+      width: 200px;
+      background-color: #7E42F1;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      text-align: center;
+    }
+
+    .button:hover {
+      background-color: #4d06d0;
+    }
+
+    .profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;}
+
+  .links{
+    margin-top: 50px;
+  }
+
+  .links a{
+    margin: 5px;
+  }
+
+  </style>
+{% endblock %}
+
+{% block logout%}
+<a class="bg-primary text-white w-28 h-12 rounded-full flex justify-center items-center font-semibold hover:shadow-lg" href="{{url_for('logout')}}">Logout</a>
+{% endblock %}
+  
+{% block content %}
+  <div class="container">
+
+
+    <h1>Welcome<span style="font-weight: bold;">{{user.first_name}} {{user.last_name}}!</span></h1>
+ 
+    
+    <div class="profile-details">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png" alt="Profile Picture" class="profile-picture">
+      <h2>Profile Details</h2>
+      <div class="detail">
+        <label for="firstName">First Name:</label>
+        <span id="firstName">{{user.first_name}}</span>
+      </div>
+      <div class="detail">
+        <label for="lastName">Last Name:</label>
+        <span id="lastName">{{user.last_name}}</span>
+      </div>
+      <div class="detail">
+        <label for="phoneNumber">Phone Number:</label>
+        <span id="phoneNumber">{{user.phone_number}}</span>
+      </div>
+      <div class="detail">
+        <label for="email">Email:</label>
+        <span id="email">{{user.email}}</span>
+      </div>
+      {% if user.role_id == 0 %}
+      <div class="links">
+      <a href="{{url_for('reservation')}}" class="button">Make a Reservation</a> 
+      <a href="{{url_for('add_review')}}" class="button">Add a Review</a>
+      <a href="{{url_for('user_reservations')}}" class="button">Your Reservations</a></div>
+      {% endif %}
+
+      {% if user.role_id == 1 %}
+      <a href="{{url_for('manage_hotel')}}" class="button">Manage your Hotel</a> 
+      <a href="{{url_for('change_hotel_details')}}" class="button">Change Hotel Description</a>
+      {% endif %}
+      
+      {% if user.role_id == 2 %}
+      <a href="{{url_for('manage_transport')}}" class="button">Manage your Transports</a> 
+      {% endif %}
+    </div> 
+  </div>
+{% endblock %}

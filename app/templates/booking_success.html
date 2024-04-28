@@ -1,0 +1,77 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Booking Success
+{% endblock %}
+
+
+{% block logout%}
+<a class="bg-txt text-white w-28 h-12 rounded-full flex justify-center items-center font-semibold hover:shadow-lg hover:text-primary" href="{{url_for('logout')}}">Logout</a>
+{% endblock %}
+
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        width: 500px !important;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+        width: 400px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+
+    }
+
+    .card-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .card-text {
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: #666;
+    }
+
+
+    .container a{
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #7E42F1;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: center;
+        }
+</style>
+
+<div class="container">
+    <div class="card">
+        <h1 class="card-title">Booking Confirmed!</h1>
+        <p class="card-text">Your booking has been confirmed successfully.</p>
+        <div>
+            <a href="{{ url_for('download_invoice') }}" class="btn">Download Invoice</a>
+            <a href="{{ url_for('profile') }}" class="btn">Go to Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

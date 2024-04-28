@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block title %}
+  See Destinations
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-4">Destinations</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for destination in destinations %}
+        <div class="bg-white rounded-lg shadow-lg p-4 flex flex-col">
+            <h2 class="text-xl font-semibold mb-2">{{ destination.destination_name }}</h2>
+            <p class="text-gray-600 flex-1">{{ destination.destination_description }}</p>
+            <h3 class="text-lg font-semibold mt-4">Reviews</h3>
+            {% if destination_reviews[destination]%}
+                {% for review in destination_reviews[destination] %}
+                    <div class="border-t border-gray-300 mt-2 pt-2">
+                        <p class="text-gray-600">Rating: {{ review.rating }}</p>
+                        <p class="text-gray-600">Feedback: {{ review.feedback }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-gray-600">No reviews yet.</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

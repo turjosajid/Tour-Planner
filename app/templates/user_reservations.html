@@ -1,0 +1,110 @@
+{% extends "index.html" %}
+
+{% block title %}
+  Your Reservations
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .table-container{
+        
+        display: flex;
+        justify-content: center;
+    }
+    h1 {
+        text-align: center;
+    }
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .link-container{
+        display: flex;
+        justify-content: center;
+    }
+    .back-btn  {
+        display: block;
+        width: 150px;
+        padding: 10px;
+        background-color: #7E42F1;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .heading {
+    font-size: 50px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    }
+
+</style>
+{% endblock %}
+
+{% block logout%}
+<a class="bg-txt text-white w-28 h-12 rounded-full flex justify-center items-center font-semibold hover:shadow-lg hover:text-primary" href="{{url_for('logout')}}">Logout</a>
+{% endblock %}
+
+
+{% block content %}
+<body>
+    <h1 class = 'heading'> Your Reservations </h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>Hotel</th>
+                    <th>Room No</th>
+                    <th>Room Type</th>
+                    <th>Arrival Date</th>
+                    <th>Departure Date</th>
+                    <th>Dinner Reservation</th>
+                    <th>Cancel Reservation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.reservation_id }}</td>
+                    <td>{{ reservation.room.hotel.hotel_name }}</td>
+                    <td>{{ reservation.room.room_no }}</td>
+                    <td>{{ reservation.room.room_type }}</td>
+                    <td>{{ reservation.arrival_date }}</td>
+                    <td>{{ reservation.departure_date }}</td>
+                    <td>{{ "Yes" if reservation.dinner_reservation else "No" }}</td>
+                    <td>
+                        <a href="{{ url_for('cancel_reservation', reservation_id=reservation.reservation_id) }}" style="color: red;"> Cancel </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+
+    <span class='link-container'><a href="{{url_for('profile')}}"  class="back-btn">Back to Profile</a></span>
+</body>
+{% endblock %}

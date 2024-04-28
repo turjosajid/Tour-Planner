@@ -1,0 +1,68 @@
+{% extends "index.html" %}
+
+{% block title %}
+  Add Rooms
+{% endblock %}
+
+{% block logout %}
+<a class="bg-txt text-white w-28 h-12 rounded-full flex justify-center items-center font-semibold hover:shadow-lg hover:text-primary" href="{{ url_for('logout') }}">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8">
+    <h2 class="text-3xl font-bold mb-4 text-center">Add Rooms</h2>
+    <form action="/add_rooms" method="post" class="max-w-lg mx-auto">
+        <div class="mb-4">
+            <label for="room_no" class="block text-gray-700">Room Number:</label>
+            <input type="text" id="room_no" name="room_no" required class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="room_type" class="block text-gray-700">Room Type:</label>
+            <input type="text" id="room_type" name="room_type" required class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="cost" class="block text-gray-700">Cost:</label>
+            <input type="text" id="cost" name="cost" required class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="availability" class="block text-gray-700">Availability:</label>
+            <select id="availability" name="availability" class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500">
+                <option value="True">Available</option>
+                <option value="False">Not Available</option>
+            </select>
+        </div>
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Add Room</button>
+    </form>
+</div>
+<div class="w-32 mx-auto">
+    <a href="{{ url_for('profile') }}" class="block bg-black text-white py-2 px-4 rounded-md text-center mt-4 hover:shadow-lg">Go to Profile</a>
+</div>
+<div class="container mx-auto mt-8">
+    <h2 class="text-3xl font-bold mb-4 text-center">Added Rooms</h2>
+    <table class="w-full table-auto">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Room Number</th>
+                <th class="px-4 py-2">Room Type</th>
+                <th class="px-4 py-2">Cost</th>
+                <th class="px-4 py-2">Availability</th>
+                <th class="px-4 py-2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td class="border px-4 py-2">{{ room.room_no }}</td>
+                <td class="border px-4 py-2">{{ room.room_type }}</td>
+                <td class="border px-4 py-2">{{ room.cost }}</td>
+                <td class="border px-4 py-2">{{ "Available" if room.availability else "Not Available" }}</td>
+                <td class="border px-4 py-2 space-x-2">
+                    <a href="{{ url_for('toggle_room', room_id=room.room_id) }}" class="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600">Change Availability</a>
+                    <a href="{{ url_for('delete_room', room_id=room.room_id) }}" class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">Delete Room</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

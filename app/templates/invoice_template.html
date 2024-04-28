@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .invoice {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .invoice h1 {
+            text-align: center;
+            color: #333;
+        }
+        .invoice hr {
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+        .invoice p {
+            margin: 10px 0;
+        }
+        .invoice .details {
+            margin-bottom: 20px;
+        }
+        .invoice .details p {
+            margin: 5px 0;
+        }
+        .invoice .item {
+            margin-bottom: 10px;
+        }
+        .invoice .item p {
+            margin: 5px 0;
+        }
+        .invoice .total {
+            text-align: right;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice">
+        <h1>Invoice</h1>
+        <p>TOURPLANNER</p>
+        <p> Customer Name: {{ data.user_name }}</p>
+        <hr>
+        <div class="details">
+            <table>
+                <tr>
+                    <td>Reservation ID:</td>
+                    <td>{{ data.reservation_id }}</td>
+                </tr>
+                <tr>
+                    <td>Reservation Date:</td>
+                    <td>{{ data.reservation_date }}</td>
+                </tr>
+                <tr>
+                    <td>Destination:</td>
+                    <td>{{ data.destination.destination_name }}</td>
+                </tr>
+                <tr>
+                    <td>Hotel:</td>
+                    <td>{{ data.hotel.hotel_name }}</td>
+                </tr>
+                <tr>
+                    <td>Transport:</td>
+                    <td>{{ data.transport.transport_type }}</td>
+                </tr>
+                <tr>
+                    <td>Room no:</td>
+                    <td>{{ data.room.room_no }}</td>
+                </tr>
+                <tr>
+                    <td>Room Type:</td>
+                    <td>{{ data.room.room_type }}</td>
+                </tr>
+                <tr>
+                    <td>Arrival Date:</td>
+                    <td>{{ data.arrival_date }}</td>
+                </tr>
+                <tr>
+                    <td>Departure Date:</td>
+                    <td>{{ data.departure_date }}</td>
+                </tr>
+                <tr>
+                    <td>Stay Duration:</td>
+                    <td>{{ data.stay_duration }} Night(s)</td>
+                </tr>
+                <tr>
+                    <td>Dinner Reservation:</td>
+                    <td>{{ "Yes" if data.dinner_reservation else "No" }}</td>
+                </tr>
+                
+            </table>
+        </div>
+        <div class="total">
+            <p><strong>Total Cost:</strong> {{ data.total_room_cost + 2 * data.transport.cost }} BDT</p>
+        </div>
+    </div>
+</body>
+</html>
